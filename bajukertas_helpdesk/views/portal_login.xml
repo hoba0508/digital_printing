@@ -1,0 +1,23 @@
+<odoo>
+    <template id="portal_login" name="Helpdesk Portal Login" website="true">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h2>Customer Portal Login</h2>
+                <form action="/helpdesk/login/submit" method="post">
+                    <t t-if="error">
+                        <div class="alert alert-danger"><t t-esc="error"/></div>
+                    </t>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="login" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" required/>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Login</button>
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>
