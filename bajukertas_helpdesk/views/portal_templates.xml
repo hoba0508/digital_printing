@@ -1,0 +1,61 @@
+<odoo>
+    <template id="portal_ticket_list" name="Portal Helpdesk Tickets" inherit_id="website.layout">
+        <xpath expr="//main" position="replace">
+            <main class="container">
+                <h1>My Helpdesk Tickets</h1>
+                <a href="/helpdesk/new" class="btn btn-primary mb-3">Create New Ticket</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Order</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="tickets" t-as="ticket">
+                            <tr>
+                                <td><t t-esc="ticket.name"/></td>
+                                <td><t t-esc="ticket.order_id.name"/></td>
+                                <td><t t-esc="ticket.state"/></td>
+                                <td><t t-esc="ticket.create_date"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </main>
+        </xpath>
+    </template>
+
+    <template id="portal_ticket_form" name="Portal Helpdesk Ticket Form" inherit_id="website.layout">
+        <xpath expr="//main" position="replace">
+            <main class="container">
+                <h1>Create New Helpdesk Ticket</h1>
+                <form action="/helpdesk/create" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="name" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Sales Order</label>
+                        <select name="order_id" class="form-control" required>
+                            <t t-foreach="orders" t-as="order">
+                                <option t-att-value="order.id" t-esc="order.name"/>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Design Files (PNG/JPG)</label>
+                        <input type="file" name="attachment_ids" class="form-control" multiple/>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-2">Submit</button>
+                </form>
+            </main>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+    <template id="portal_dashboard" name="Helpdesk Portal Dashboard" website="true">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h2>Welcome <t t-esc="request.env.user.name"/></h2>
+
+                <h3>Your Orders</h3>
+                <ul>
+                    <t t-foreach="orders" t-as="o">
+                        <li>
+                            <t t-esc="o.name"/>
+                            - <a t-att-href="'/helpdesk/ticket/create/%s' % o.id">Upload Design</a>
+                        </li>
+                    </t>
+                </ul>
+
+                <h3>Your Tickets</h3>
+                <ul>
+                    <t t-foreach="tickets" t-as="t">
+                        <li>
+                            <t t-esc="t.name"/> - <t t-esc="t.state"/>
+                        </li>
+                    </t>
+                </ul>
+
+                <a href="/web/session/logout" class="btn btn-secondary mt-3">Logout</a>
+            </div>
+        </t>
+    </template>
+</odoo>
